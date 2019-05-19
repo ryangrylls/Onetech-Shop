@@ -65,6 +65,7 @@ class LogoutView(View):
         # return render(request, template_name, {'logout':"logout success!"})
 
 
-# class CartView(view):
-#     def get(self, request, *args, **kwargs):
-        
+class CartView(View):
+    def get(self, request, *args, **kwargs):
+        template_name = 'cart.html'
+        return render(request, template_name)
