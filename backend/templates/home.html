@@ -34,8 +34,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{% static "images/phone.png" %}" alt=""></div>+38 068 005 3570</div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{% static "images/mail.png" %}" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
 								<ul class="standard_dropdown top_bar_dropdown">
@@ -82,7 +82,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#">OneTech</a></div>
+							<div class="logo"><a href="{% url 'shop:home' %}">OneTech</a></div>
 						</div>
 					</div>
 
@@ -160,7 +160,7 @@
 									<div class="cat_burger"><span></span><span></span><span></span></div>
 									<div class="cat_menu_text">categories</div>
 								</div>
-
+								<!--
 								<ul class="cat_menu">
 									<li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
 									<li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
@@ -172,7 +172,7 @@
 												<ul>
 													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
 													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+														<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
 													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
 												</ul>
 											</li>
@@ -181,12 +181,17 @@
 											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
 										</ul>
 									</li>
-									<li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+								</ul>
+								-->
+								<ul class="cat_menu">
+								{% for item in categories %}
+									<li> <a href ="{% url 'shop:categories' item.id %}"> {{ item.category_name }} <i class="fas fa-chevron-right ml-auto"></i></a></li>
+								{% endfor %}
+								<!--
+									<li><a href="{% url 'shop:categories' "Phone" %}">Phone<i class="fas fa-chevron-right ml-auto"></i></a></li>
+									<li><a href="{% url 'shop:categories' "Laptop" %}">Laptop<i class="fas fa-chevron-right ml-auto"></i></a></li>
+									<li><a href="{% url 'shop:categories' "Watch" %}">Watch<i class="fas fa-chevron-right ml-auto"></i></a></li>
+								-->
 								</ul>
 							</div>
 
@@ -349,6 +354,7 @@
 
 	</header>
 	<!-- Banner -->
+	{% block content %}
 
 	<div class="banner">
 		<div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
@@ -368,7 +374,6 @@
 	</div>
 
 	<!-- Characteristics -->
-
 	<div class="characteristics">
 		<div class="container">
 			<div class="row">
@@ -4269,10 +4274,8 @@
 			</div>
 		</div>
 	</div>
-
 	<!- - Recently Viewed -->
-
-	<div class="viewed">
+	<div class="viewed">	
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -4418,15 +4421,16 @@
 			</div>
 		</div>
 	</div>
-
 	<!- - Newsletter -->
+	{% endblock content %}
+
 	<div class="newsletter">
 		<div class="container">
 			<div class="row">
 				<div class="col">
 					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
 						<div class="newsletter_title_container">
-							<div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+							<div class="newsletter_icon"><img src="{% static "images/send.png" %}" alt=""></div>
 							<div class="newsletter_title">Sign up for Newsletter</div>
 							<div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
 						</div>

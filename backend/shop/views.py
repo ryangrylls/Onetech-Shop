@@ -3,12 +3,16 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
+from .models import *
 # Create your views here.
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-        content = {}
-        return render(request, 'home.html')
+        categories = Category.objects.all()
+        content = {
+            "categories": categories
+        }
+        return render(request, 'home.html', content)
         
 
 class LoginView(View):
@@ -68,4 +72,23 @@ class LogoutView(View):
 class CartView(View):
     def get(self, request, *args, **kwargs):
         template_name = 'cart.html'
+        return render(request, template_name)
+
+
+class CategoryView(View):
+    def get(self, request, category, *args, **kwargs):
+        template_name = 'shop.html'
+        products = Product.objects.filter(category=category)
+        categories = Category.objects.all()
+
+        content = {
+            'products': products,
+            'categories': categories
+        }
+        print(products[0].image.url)
+        return render(request, template_name, content)
+
+    def post(self, request, category, *args, **kwargs):
+        template_name = 'shop.html'
+        # products = Product.objects.get(category=category)
         return render(request, template_name)

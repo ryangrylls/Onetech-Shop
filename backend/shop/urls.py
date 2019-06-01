@@ -10,4 +10,5 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('cart/', CartView.as_view(), name='cart'),
+    path('categories/<slug:category>/', CategoryView.as_view(), name='categories'),
 ]
